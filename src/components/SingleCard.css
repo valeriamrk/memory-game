@@ -1,0 +1,20 @@
+.card {
+  position: relative;
+}
+
+.card img {
+  width: 100%;
+  display: block;
+  /* border: 2px solid white;
+  border-radius: 6px; */
+}
+
+.front {
+  width: 150px;
+}
+
+.back {
+  width: 170px;
+
+}
+
