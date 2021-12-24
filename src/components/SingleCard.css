@@ -9,12 +9,29 @@
   border-radius: 6px; */
 }
 
-.front {
-  width: 150px;
+.card .front {
+  width: 90px;
+  margin-top: 20px;
+  margin-left: 5px;
+  transform: rotateY(90deg);
+  transition: all ease-in 0.2s;
+  position: absolute;
 }
 
-.back {
-  width: 170px;
-
+.flipped .front {
+  transform: rotateY(0deg);
+  transition-delay: 0.2s;
 }
+
+.card .back {
+  width: 100px;
+  transition: all ease-in 0.2s;
+  transition-delay: 0.2s;
+}
+
+.flipped .back {
+  transform: rotateY(90deg);
+  transition-delay: 0s;
+}
+
 

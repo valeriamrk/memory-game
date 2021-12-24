@@ -16,6 +16,7 @@ function App() {
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
+  const [disabled, setDisabled] = useState(false);
 
   // shuffle cards
   const shuffleCards = () => {
@@ -23,6 +24,8 @@ function App() {
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }));
 
+    setChoiceOne(null);
+    setChoiceTwo(null);
     setCards(shuffledCards);
     setTurns(0);
   };
@@ -34,45 +37,57 @@ function App() {
 
   // compare 2 selected cards
   useEffect(() => {
-    if(choiceOne && choiceTwo) {
-
-      if(choiceOne.src === choiceTwo.src) {
-        setCards(prevCards => {
-          return prevCards.map(card => {
+    if (choiceOne && choiceTwo) {
+      setDisabled(true);
+      if (choiceOne.src === choiceTwo.src) {
+        setCards((prevCards) => {
+          return prevCards.map((card) => {
             if (card.src === choiceOne.src) {
-              return {...card, matched: true}
+              return { ...card, matched: true };
             } else {
-              return card
+              return card;
             }
-          })
-        })
-        resetTurn()
+          });
+        });
+        resetTurn();
       } else {
-        console.log("no match")
-        resetTurn()
+        setTimeout(() => resetTurn(), 1000);
       }
     }
-  }, [choiceOne, choiceTwo])
+  }, [choiceOne, choiceTwo]);
 
-  console.log(cards)
+  console.log(cards);
 
   // reset choices & increase turn
   const resetTurn = () => {
-    setChoiceOne(null)
-    setChoiceTwo(null)
-    setTurns(prevTurns => prevTurns + 1)
-  }
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setTurns((prevTurns) => prevTurns + 1);
+    setDisabled(false);
+  };
+
+  // start a new game automatically
+  useEffect(() => {
+    shuffleCards();
+  }, []);
 
   return (
     <div className="App">
-      <h1>Magic Match</h1>
+      <h2>Magic Match</h2>
       <button onClick={shuffleCards}>New Game</button>
 
       <div className="card-grid">
         {cards.map((card) => (
-          <SingleCard key={card.id} card={card} handleChoice={handleChoice} />
+          <SingleCard
+            key={card.id}
+            card={card}
+            handleChoice={handleChoice}
+            flipped={card === choiceOne || card === choiceTwo || card.matched}
+            disabled={disabled}
+          />
         ))}
       </div>
+      <p>Turns: {turns}</p>
     </div>
   );
 }
