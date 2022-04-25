@@ -1,6 +1,8 @@
-import "./App.css";
+import "./App.scss";
 import React, { useEffect, useState } from "react";
-import SingleCard from "./components/SingleCard";
+import SingleCard from "./components/presentational/organisms/singleCard/SingleCard";
+import { GamePage, WelcomePage } from "./components/presentational";
+import { Route, Routes } from "react-router-dom";
 
 const cardImages = [
   { src: "/img/book.png", matched: false },
@@ -12,68 +14,74 @@ const cardImages = [
 ];
 
 function App() {
-  const [cards, setCards] = useState([]);
-  const [turns, setTurns] = useState(0);
-  const [choiceOne, setChoiceOne] = useState(null);
-  const [choiceTwo, setChoiceTwo] = useState(null);
-  const [disabled, setDisabled] = useState(false);
+//   const [cards, setCards] = useState([]);
+//   const [turns, setTurns] = useState(0);
+//   const [choiceOne, setChoiceOne] = useState(null);
+//   const [choiceTwo, setChoiceTwo] = useState(null);
+//   const [disabled, setDisabled] = useState(false);
 
-  // shuffle cards
-  const shuffleCards = () => {
-    const shuffledCards = [...cardImages, ...cardImages]
-      .sort(() => Math.random() - 0.5)
-      .map((card) => ({ ...card, id: Math.random() }));
+//   // shuffle cards
+//   const shuffleCards = () => {
+//     const shuffledCards = [...cardImages, ...cardImages]
+//       .sort(() => Math.random() - 0.5)
+//       .map((card) => ({ ...card, id: Math.random() }));
 
-    setChoiceOne(null);
-    setChoiceTwo(null);
-    setCards(shuffledCards);
-    setTurns(0);
-  };
+//     setChoiceOne(null);
+//     setChoiceTwo(null);
+//     setCards(shuffledCards);
+//     setTurns(0);
+//   };
 
-  //handle a choice
-  const handleChoice = (card) => {
-    choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
-  };
+//   //handle a choice
+//   const handleChoice = (card) => {
+//     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
+//   };
 
-  // compare 2 selected cards
-  useEffect(() => {
-    if (choiceOne && choiceTwo) {
-      setDisabled(true);
-      if (choiceOne.src === choiceTwo.src) {
-        setCards((prevCards) => {
-          return prevCards.map((card) => {
-            if (card.src === choiceOne.src) {
-              return { ...card, matched: true };
-            } else {
-              return card;
-            }
-          });
-        });
-        resetTurn();
-      } else {
-        setTimeout(() => resetTurn(), 1000);
-      }
-    }
-  }, [choiceOne, choiceTwo]);
+//   // compare 2 selected cards
+//   useEffect(() => {
+//     if (choiceOne && choiceTwo) {
+//       setDisabled(true);
+//       if (choiceOne.src === choiceTwo.src) {
+//         setCards((prevCards) => {
+//           return prevCards.map((card) => {
+//             if (card.src === choiceOne.src) {
+//               return { ...card, matched: true };
+//             } else {
+//               return card;
+//             }
+//           });
+//         });
+//         resetTurn();
+//       } else {
+//         setTimeout(() => resetTurn(), 1000);
+//       }
+//     }
+//   }, [choiceOne, choiceTwo]);
 
-  console.log(cards);
+//   console.log(cards);
 
-  // reset choices & increase turn
-  const resetTurn = () => {
-    setChoiceOne(null);
-    setChoiceTwo(null);
-    setTurns((prevTurns) => prevTurns + 1);
-    setDisabled(false);
-  };
+//   // reset choices & increase turn
+//   const resetTurn = () => {
+//     setChoiceOne(null);
+//     setChoiceTwo(null);
+//     setTurns((prevTurns) => prevTurns + 1);
+//     setDisabled(false);
+//   };
 
-  // start a new game automatically
-  useEffect(() => {
-    shuffleCards();
-  }, []);
+//   // start a new game automatically
+//   useEffect(() => {
+//     shuffleCards();
+//   }, []);
 
   return (
     <div className="App">
-      <h2>Magic Match</h2>
+      <Routes>
+      <Route path="/" element={<WelcomePage/>}/>
+      <Route index element={<WelcomePage />} />
+      <Route path="/newgame" element={<GamePage />} />
+      <Route path="*" element={<div>Not found</div>} />
+      </Routes>
+      {/* <h2>Magic Match</h2>
       <button onClick={shuffleCards}>New Game</button>
 
       <div className="card-grid">
@@ -87,7 +95,7 @@ function App() {
           />
         ))}
       </div>
-      <p>Turns: {turns}</p>
+      <p>Turns: {turns}</p> */}
     </div>
   );
 }

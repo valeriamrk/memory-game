@@ -1,0 +1,19 @@
+.container {
+  width: 300px;
+  border: 1px solid #c23866;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.label {
+  border: 1px solid #c23866;
+  padding: 6px 12px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  &:hover {
+    font-weight: 600;
+  };
+}

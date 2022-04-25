@@ -1,5 +1,5 @@
 import React from "react";
-import "./SingleCard.css";
+import "./SingleCard.scss";
 
 const SingleCard = (props) => {
   const { card, handleChoice, flipped, disabled } = props;
@@ -24,4 +24,4 @@ const SingleCard = (props) => {
   );
 };
 
-export default SingleCard;
+export { SingleCard };
