@@ -1,101 +1,38 @@
 import "./App.scss";
-import React, { useEffect, useState } from "react";
-import SingleCard from "./components/presentational/organisms/singleCard/SingleCard";
+import React, { useState } from "react";
 import { GamePage, WelcomePage } from "./components/presentational";
-import { Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { playerName, selectMode } from "./store/dataSlice";
 
-const cardImages = [
-  { src: "/img/book.png", matched: false },
-  { src: "/img/bunny.png", matched: false },
-  { src: "/img/hat.png", matched: false },
-  { src: "/img/magic-ball.png", matched: false },
-  { src: "/img/rainbow-castle.png", matched: false },
-  { src: "/img/smoke.png", matched: false },
-];
 
 function App() {
-//   const [cards, setCards] = useState([]);
-//   const [turns, setTurns] = useState(0);
-//   const [choiceOne, setChoiceOne] = useState(null);
-//   const [choiceTwo, setChoiceTwo] = useState(null);
-//   const [disabled, setDisabled] = useState(false);
 
-//   // shuffle cards
-//   const shuffleCards = () => {
-//     const shuffledCards = [...cardImages, ...cardImages]
-//       .sort(() => Math.random() - 0.5)
-//       .map((card) => ({ ...card, id: Math.random() }));
+  const [nameValue, setNameValue] = useState("New Player");
+  const [gameMode, setGameMode] = useState();
+  const [startGame, setStartGame] = useState(false)
 
-//     setChoiceOne(null);
-//     setChoiceTwo(null);
-//     setCards(shuffledCards);
-//     setTurns(0);
-//   };
+  const dispatch = useDispatch();
 
-//   //handle a choice
-//   const handleChoice = (card) => {
-//     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
-//   };
 
-//   // compare 2 selected cards
-//   useEffect(() => {
-//     if (choiceOne && choiceTwo) {
-//       setDisabled(true);
-//       if (choiceOne.src === choiceTwo.src) {
-//         setCards((prevCards) => {
-//           return prevCards.map((card) => {
-//             if (card.src === choiceOne.src) {
-//               return { ...card, matched: true };
-//             } else {
-//               return card;
-//             }
-//           });
-//         });
-//         resetTurn();
-//       } else {
-//         setTimeout(() => resetTurn(), 1000);
-//       }
-//     }
-//   }, [choiceOne, choiceTwo]);
+  const chooseMode = (id) => {
+    setGameMode(id);
+    console.log(id)
+  };
 
-//   console.log(cards);
-
-//   // reset choices & increase turn
-//   const resetTurn = () => {
-//     setChoiceOne(null);
-//     setChoiceTwo(null);
-//     setTurns((prevTurns) => prevTurns + 1);
-//     setDisabled(false);
-//   };
-
-//   // start a new game automatically
-//   useEffect(() => {
-//     shuffleCards();
-//   }, []);
+  const handleButtonClick = () => {
+    console.log("start")
+    if (nameValue.length !== 0 && gameMode) {
+      dispatch(playerName(nameValue));
+      dispatch(selectMode(gameMode));
+      setStartGame(!startGame)
+    }
+  };
 
   return (
     <div className="App">
-      <Routes>
-      <Route path="/" element={<WelcomePage/>}/>
-      <Route index element={<WelcomePage />} />
-      <Route path="/newgame" element={<GamePage />} />
-      <Route path="*" element={<div>Not found</div>} />
-      </Routes>
-      {/* <h2>Magic Match</h2>
-      <button onClick={shuffleCards}>New Game</button>
+      
+      {startGame ? <GamePage nameValue={nameValue} startGame={startGame} setStartGame={setStartGame} chooseMode={chooseMode} gameMode={gameMode}/> : <WelcomePage nameValue={nameValue} setNameValue={setNameValue} chooseMode={chooseMode} gameMode={gameMode} handleButtonClick={handleButtonClick}/> }
 
-      <div className="card-grid">
-        {cards.map((card) => (
-          <SingleCard
-            key={card.id}
-            card={card}
-            handleChoice={handleChoice}
-            flipped={card === choiceOne || card === choiceTwo || card.matched}
-            disabled={disabled}
-          />
-        ))}
-      </div>
-      <p>Turns: {turns}</p> */}
     </div>
   );
 }

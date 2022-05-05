@@ -1,16 +1,20 @@
 import React from "react";
-import * as S from "./styles";
+import "./MyModal.scss";
+
 
 const MyModal = (props) => {
-  const { modalActive, handleClose, children } = props;
+  const { modalActive, handleClose, children, setModalActive } = props;
+
+  
 
   return (
-    <div className="modalWrapper" modalActive={modalActive} onClick={() => handleClose()}>
-      <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+    // <div className={modalActive ? "modal active" : "modal"} modalActive={modalActive} onClick={() => setModalActive(false)}>
+    <div className={modalActive ? "modal active" : "modal"} modalActive={modalActive}>
+      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         {children}
       </div>
     </div>
   );
-};
+}; 
 
 export { MyModal };

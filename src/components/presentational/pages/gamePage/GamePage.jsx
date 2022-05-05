@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {SingleCard} from "../../organisms/singleCard/SingleCard"
+import { useCountdown } from "../../../../hooks/useCountdown";
+import { Countdown, MyModal, Win, Loose } from "../../../presentational";
+import { SingleCard } from "../../organisms/singleCard/SingleCard";
 
 const cardImages = [
   { src: "/img/book.png", matched: false },
@@ -10,13 +12,21 @@ const cardImages = [
   { src: "/img/smoke.png", matched: false },
 ];
 
-const GamePage = () => {
-  
+const modals = [
+  { id: 1, label: "win", opened: false },
+  { id: 2, label: "loose", opened: false },
+];
+
+const GamePage = (props) => {
+  const { nameValue, startGame, setStartGame, chooseMode, gameMode } = props;
   const [cards, setCards] = useState([]);
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
+  const expiringTime = new Date().getTime() + 60 * 1000;
+
+  const [modalActive, setModalActive] = useState(false);
 
   // shuffle cards
   const shuffleCards = () => {
@@ -71,10 +81,46 @@ const GamePage = () => {
     shuffleCards();
   }, []);
 
+  const restartGame = () => {
+    shuffleCards();
+    setModalActive(false);
+  };
+
   return (
     <div className="App">
-      <h2>Magic Match</h2>
-      <button onClick={shuffleCards}>New Game</button>
+      <MyModal
+        modalActive={modalActive}
+        setModalActive={setModalActive}
+        startGame={startGame}
+        setStartGame={setStartGame}
+      >
+        <Win
+          startGame={startGame}
+          shuffleCards={shuffleCards}
+          setStartGame={setStartGame}
+          restartGame={restartGame}
+          turns={turns}
+        />
+      </MyModal>
+      {/* <MyModal startGame={startGame} setStartGame={setStartGame} modalActive={modalActive} setModalActive={setModalActive}><Loose startGame={startGame} shuffleCards={shuffleCards} setStartGame={setStartGame} restartGame={restartGame}/></MyModal> */}
+      <h2>Hi, {nameValue}</h2>
+      <button onClick={shuffleCards}>Start new game</button>
+      <button onClick={() => setModalActive(true)}>Modal open</button>
+
+      {gameMode === 1 ? (
+        <Countdown
+          targetDate={expiringTime}
+          startGame={startGame}
+          shuffleCards={shuffleCards}
+          setStartGame={setStartGame}
+          restartGame={restartGame}
+        />
+      ) : (
+        <div></div>
+      )}
+      {gameMode === 2 ? <p>Turns: {turns}/20</p> : <></>}
+
+      {gameMode === 3 ? <p>Turns: {turns}</p> : <></>}
 
       <div className="card-grid">
         {cards.map((card) => (
@@ -87,7 +133,6 @@ const GamePage = () => {
           />
         ))}
       </div>
-      <p>Turns: {turns}</p>
     </div>
   );
 };

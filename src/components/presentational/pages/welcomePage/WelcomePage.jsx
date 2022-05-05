@@ -6,25 +6,26 @@ import { useDispatch, useSelector } from "react-redux";
 import "./WelcomePage.scss";
 import { selectMode, playerName } from "../../../../store/dataSlice";
 
-const WelcomePage = () => {
-  const [nameValue, setNameValue] = useState("New Player");
-  const [gameMode, setGameMode] = useState();
+const WelcomePage = (props) => {
+  const {nameValue, setNameValue, chooseMode, gameMode, handleButtonClick} = props
+  // const [nameValue, setNameValue] = useState("New Player");
+  // const [gameMode, setGameMode] = useState();
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
 
-  const chooseMode = (id) => {
-    setGameMode(id);
-    console.log(id)
-  };
+  // const chooseMode = (id) => {
+  //   setGameMode(id);
+  //   console.log(id)
+  // };
 
-  const handleButtonClick = () => {
-    console.log("kjgk")
-    if (nameValue.length !== 0 && gameMode) {
-      dispatch(playerName(nameValue));
-      dispatch(selectMode(gameMode));
-    }
-  };
+  // const handleButtonClick = () => {
+  //   console.log("kjgk")
+  //   if (nameValue.length !== 0 && gameMode) {
+  //     dispatch(playerName(nameValue));
+  //     dispatch(selectMode(gameMode));
+  //   }
+  // };
 
   return (
     <div className="welcomeWrapper">

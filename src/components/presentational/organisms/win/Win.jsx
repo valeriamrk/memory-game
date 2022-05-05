@@ -1,12 +1,14 @@
 import React from "react";
 import { MyButton } from "../../../presentational";
 
-const Win = () => {
+const Win = (props) => {
+  const { setStartGame, restartGame, turns } = props;
+
   return <div>
 <h2>You win!</h2>
-<div>Your turns: 12</div>
-<MyButton>Play again</MyButton>
-<MyButton>Finish</MyButton>
+<h4>Your turns: {turns}</h4>
+<MyButton clickButton={() => restartGame()}>Play again</MyButton>
+<MyButton clickButton={() => setStartGame(false)}>Finish</MyButton>
   </div>;
 };
 

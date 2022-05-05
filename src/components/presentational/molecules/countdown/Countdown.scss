@@ -1,0 +1,30 @@
+.countdownWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.minutes {
+  background: none;
+  color: #c23866;
+  font-size: 40px;
+  font-weight: 600;
+  outline-width: 0px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 12px;
+  text-shadow: 1px 1px 2px #c23866;
+}
+
+.seconds {
+  background: none;
+  color: #c23866;
+  font-size: 40px;
+  font-weight: 600;
+  outline-width: 0px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px #c23866;
+}
+
