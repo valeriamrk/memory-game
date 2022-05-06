@@ -5,14 +5,15 @@ import "./Countdown.scss";
 
 
 const Countdown = (props) => {
-  const {targetDate } = props
+  const {targetDate, setModalActive } = props
 
   const [minutes, seconds] = useCountdown(targetDate);
   
+  useEffect(() => {
+    if (minutes + seconds <= 0) {
+    setModalActive(true)
+  }});
 
-  if (minutes + seconds <= 0) {
-    return <div>Time expired!</div>;
-  } else {
     return (
       <div className="countdownWrapper">
         <div className="minutes">{minutes} :</div>
@@ -20,6 +21,5 @@ const Countdown = (props) => {
       </div>
     );
   }
-};
 
 export { Countdown };

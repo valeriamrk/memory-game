@@ -8,6 +8,7 @@ export * from './organisms/gameMode/GameMode'
 export * from './organisms/win/Win'
 export * from './organisms/loose/Loose'
 export * from './organisms/modal/MyModal'
+export * from './organisms/allCards/AllCards'
 
 export * from './pages/gamePage/GamePage'
 export * from './pages/welcomePage/WelcomePage'

@@ -7,12 +7,12 @@ import "./WelcomePage.scss";
 import { selectMode, playerName } from "../../../../store/dataSlice";
 
 const WelcomePage = (props) => {
-  const {nameValue, setNameValue, chooseMode, gameMode, handleButtonClick} = props
+  const { nameValue, setNameValue, chooseMode, gameMode, handleButtonClick } =
+    props;
   // const [nameValue, setNameValue] = useState("New Player");
   // const [gameMode, setGameMode] = useState();
 
   // const dispatch = useDispatch();
-
 
   // const chooseMode = (id) => {
   //   setGameMode(id);
@@ -38,7 +38,12 @@ const WelcomePage = (props) => {
       <InputField value={nameValue} setValue={setNameValue} />
       <div className="userOptions">Choose game mode</div>
       <GameMode chooseMode={chooseMode} />
-      <MyButton disabled={nameValue.length === 0 || gameMode === undefined} clickButton={handleButtonClick}>Start game</MyButton>
+      <MyButton
+        disabled={nameValue.length === 0 || gameMode === undefined}
+        clickButton={handleButtonClick}
+      >
+        Start game
+      </MyButton>
     </div>
   );
 };

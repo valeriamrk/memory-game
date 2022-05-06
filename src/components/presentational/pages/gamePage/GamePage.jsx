@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useCountdown } from "../../../../hooks/useCountdown";
-import { Countdown, MyModal, Win, Loose } from "../../../presentational";
+import {
+  Countdown,
+  MyModal,
+  Win,
+  Loose,
+  AllCards,
+} from "../../../presentational";
 import { SingleCard } from "../../organisms/singleCard/SingleCard";
 
 const cardImages = [
@@ -18,13 +24,20 @@ const modals = [
 ];
 
 const GamePage = (props) => {
-  const { nameValue, startGame, setStartGame, chooseMode, gameMode } = props;
+  const {
+    nameValue,
+    startGame,
+    setStartGame,
+    chooseMode,
+    gameMode,
+    setNameValue,
+  } = props;
   const [cards, setCards] = useState([]);
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
-  const expiringTime = new Date().getTime() + 60 * 1000;
+  const expiringTime = new Date().getTime() + 10 * 1000;
 
   const [modalActive, setModalActive] = useState(false);
 
@@ -66,7 +79,31 @@ const GamePage = (props) => {
     }
   }, [choiceOne, choiceTwo]);
 
-  console.log(cards);
+  // win
+  const isGameFinished = () => {
+    const test = cards.every((element) => element.matched === true);
+    console.log(`element matched ${test}`);
+    if (test === true) {
+      console.log("finishgame");
+      setModalActive(true);
+    }
+  };
+
+  useEffect(() => {
+    isGameFinished();
+  });
+
+  // loose
+  const isGameLoose = () => {
+    if (gameMode === 2 && turns >= 2) {
+      console.log("loose turns");
+      setModalActive(true);
+    }
+  };
+
+  useEffect(() => {
+    isGameLoose();
+  });
 
   // reset choices & increase turn
   const resetTurn = () => {
@@ -86,6 +123,11 @@ const GamePage = (props) => {
     setModalActive(false);
   };
 
+  const backToWelcomePage = () => {
+    setModalActive(false);
+    setStartGame(false);
+  };
+
   return (
     <div className="App">
       <MyModal
@@ -100,9 +142,26 @@ const GamePage = (props) => {
           setStartGame={setStartGame}
           restartGame={restartGame}
           turns={turns}
+          backToWelcomePage={backToWelcomePage}
+          gameMode={gameMode}
         />
       </MyModal>
-      {/* <MyModal startGame={startGame} setStartGame={setStartGame} modalActive={modalActive} setModalActive={setModalActive}><Loose startGame={startGame} shuffleCards={shuffleCards} setStartGame={setStartGame} restartGame={restartGame}/></MyModal> */}
+      {/* <MyModal
+        startGame={startGame}
+        setStartGame={setStartGame}
+        modalActive={modalActive}
+        setModalActive={setModalActive}
+      >
+        <Loose
+          startGame={startGame}
+          shuffleCards={shuffleCards}
+          setStartGame={setStartGame}
+          restartGame={restartGame}
+          turns={turns}
+          backToWelcomePage={backToWelcomePage}
+          gameMode={gameMode}
+        />
+      </MyModal> */}
       <h2>Hi, {nameValue}</h2>
       <button onClick={shuffleCards}>Start new game</button>
       <button onClick={() => setModalActive(true)}>Modal open</button>
@@ -114,6 +173,7 @@ const GamePage = (props) => {
           shuffleCards={shuffleCards}
           setStartGame={setStartGame}
           restartGame={restartGame}
+          setModalActive={setModalActive}
         />
       ) : (
         <div></div>
@@ -122,6 +182,7 @@ const GamePage = (props) => {
 
       {gameMode === 3 ? <p>Turns: {turns}</p> : <></>}
 
+      {/* <AllCards cards={cards} handleChoice={handleChoice} choiceOne={choiceOne} choiceTwo={choiceTwo} disabled={disabled}/> */}
       <div className="card-grid">
         {cards.map((card) => (
           <SingleCard
