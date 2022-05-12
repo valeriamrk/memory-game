@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const useCountdown = (targetDate) => {
   const countDownDate = new Date(targetDate).getTime();
@@ -19,10 +19,10 @@ const useCountdown = (targetDate) => {
 };
 
 function getZero(num) {
-  if (num >=0 && num < 10 ) {
-    return `0${num}`
+  if (num >= 0 && num < 10) {
+    return `0${num}`;
   } else {
-    return num
+    return num;
   }
 }
 
@@ -32,7 +32,9 @@ const getReturnValues = (countDown) => {
   // const hours = Math.floor(
   //   (countDown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
   // );
-  const minutes = getZero(Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60)));
+  const minutes = getZero(
+    Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60))
+  );
   const seconds = getZero(Math.floor((countDown % (1000 * 60)) / 1000));
 
   return [minutes, seconds];

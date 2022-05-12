@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "./GameMode.scss";
 
 const GameMode = (props) => {
-  const { chooseMode } = props;
+  const { chooseMode, gameMode } = props;
+
   const gameModes = [
     { id: 1, label: "byTime", name: "By time", checked: false },
     { id: 2, label: "byTurns", name: "By turns", checked: false },
@@ -18,7 +19,10 @@ const GameMode = (props) => {
   return (
     <div className="container">
       {gameModes.map((element) => (
-        <div className="label" onClick={() => handleClick(element.id)}>
+        <div
+          className={gameMode === element.id ? "label active" : "label"}
+          onClick={() => handleClick(element.id)}
+        >
           {element.name}
         </div>
       ))}

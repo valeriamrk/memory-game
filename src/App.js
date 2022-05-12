@@ -19,8 +19,6 @@ function App() {
   const handleButtonClick = () => {
     console.log("start");
     if (nameValue.length !== 0 && gameMode) {
-      dispatch(playerName(nameValue));
-      dispatch(selectMode(gameMode));
       setStartGame(!startGame);
     }
   };
@@ -35,6 +33,7 @@ function App() {
           chooseMode={chooseMode}
           gameMode={gameMode}
           setNameValue={setNameValue}
+          setGameMode={setGameMode}
         />
       ) : (
         <WelcomePage
