@@ -7,12 +7,13 @@ const Countdown = (props) => {
 
   const [minutes, seconds] = useCountdown(targetDate);
   const elapsedTime = (60) - (minutes + seconds)
-  console.log(elapsedTime)
+  // console.log(elapsedTime)
 
   useEffect(() => {
     if (minutes + seconds <= 0) {
       setModalActive(true);
-      setGameLoosed(true);
+      setGameLoosed(true);  
+
     }
   });
 

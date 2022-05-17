@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Countdown, MyModal } from "../../../presentational";
+import { Countdown, MyModal, Countdown2 } from "../../../presentational";
 import { SingleCard } from "../../organisms/singleCard/SingleCard";
 import "./GamePage.scss";
 
@@ -26,7 +26,7 @@ const GamePage = (props) => {
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
-  const expiringTime = new Date().getTime() + 60 * 1000;
+  // const expiringTime = new Date().getTime() + 6 * 1000;
   const [modalActive, setModalActive] = useState(false);
   const [gameLoosed, setGameLoosed] = useState(false);
 
@@ -142,14 +142,18 @@ const GamePage = (props) => {
       <button onClick={() => setModalActive(true)}>Modal open</button>
 
       {gameMode === 1 ? (
-        <Countdown
-          targetDate={expiringTime}
-          startGame={startGame}
-          shuffleCards={shuffleCards}
-          setStartGame={setStartGame}
-          restartGame={restartGame}
-          setModalActive={setModalActive}
-          setGameLoosed={setGameLoosed}
+        // <Countdown
+        //   targetDate={expiringTime}
+        //   startGame={startGame}
+        //   shuffleCards={shuffleCards}
+        //   setStartGame={setStartGame}
+        //   restartGame={restartGame}
+        //   setModalActive={setModalActive}
+        //   setGameLoosed={setGameLoosed}
+        // />
+        <Countdown2
+        setModalActive={setModalActive}
+        setGameLoosed={setGameLoosed}
         />
       ) : (
         <div></div>
