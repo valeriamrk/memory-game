@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Countdown, MyModal } from "../../../presentational";
 import { SingleCard } from "../../organisms/singleCard/SingleCard";
+import "animate.css";
+
 import "./GamePage.scss";
 
 const cardImages = [
@@ -151,6 +153,7 @@ const GamePage = (props) => {
 
       <h2>Hi, {nameValue}</h2>
       <button onClick={restartGame}>Restart game</button>
+      <button onClick={backToWelcomePage}>Exit</button>
 
       {gameMode === 1 ? (
         <Countdown
@@ -165,7 +168,7 @@ const GamePage = (props) => {
 
       {gameMode === 3 ? <p>Turns: {turns}</p> : <></>}
 
-      <div className={`card-grid`}>
+      <div className={"card-grid"}>
         {cards?.map((card) => (
           <SingleCard
             key={card.id}

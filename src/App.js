@@ -1,15 +1,11 @@
 import "./App.scss";
 import React, { useState } from "react";
 import { GamePage, WelcomePage } from "./components/presentational";
-import { useDispatch } from "react-redux";
-import { playerName, selectMode } from "./store/dataSlice";
 
 function App() {
   const [nameValue, setNameValue] = useState("New Player");
   const [gameMode, setGameMode] = useState();
   const [startGame, setStartGame] = useState(false);
-
-  const dispatch = useDispatch();
 
   const chooseMode = (id) => {
     setGameMode(id);

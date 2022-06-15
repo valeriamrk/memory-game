@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { InputField, MyButton, GameMode } from "../../../presentational";
 
 import "./WelcomePage.scss";

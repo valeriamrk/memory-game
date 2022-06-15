@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import "./GameMode.scss";
 
 const GameMode = (props) => {
@@ -20,6 +19,7 @@ const GameMode = (props) => {
     <div className="container">
       {gameModes.map((element) => (
         <div
+          key={element.id}
           className={gameMode === element.id ? "label active" : "label"}
           onClick={() => handleClick(element.id)}
         >
