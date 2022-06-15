@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Countdown, MyModal, Countdown2 } from "../../../presentational";
+import { Countdown, MyModal } from "../../../presentational";
 import { SingleCard } from "../../organisms/singleCard/SingleCard";
 import "./GamePage.scss";
 
@@ -21,32 +21,66 @@ const GamePage = (props) => {
     setNameValue,
     setGameMode,
   } = props;
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState();
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
-  // const expiringTime = new Date().getTime() + 6 * 1000;
   const [modalActive, setModalActive] = useState(false);
   const [gameLoosed, setGameLoosed] = useState(false);
+  const [pauseTimer, setPauseTimer] = useState(false);
+  const [resetTimer, setResetTimer] = useState(false);
 
   // shuffle cards
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }));
+    setCards(shuffledCards);
+  };
 
+  const startNewGame = () => {
+    shuffleCards();
     setChoiceOne(null);
     setChoiceTwo(null);
-    setCards(shuffledCards);
     setTurns(0);
     setModalActive(false);
+  };
+
+  const restartGame = () => {
+    startNewGame();
+    setResetTimer(true);
+    setTimeout(() => setResetTimer(false), 0);
+  };
+
+  const backToWelcomePage = () => {
+    setModalActive(false);
+    setStartGame(false);
+    setGameMode();
+    setNameValue("New Player");
   };
 
   //handle a choice
   const handleChoice = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
+
+  // win
+  const isGameFinished = () => {
+    const allCardsMatched = cards?.every((element) => element.matched === true);
+    console.log(`element matched ${allCardsMatched}`);
+    if (allCardsMatched === true) {
+      console.log("finishgame");
+      setTimeout(() => setModalActive(true), 500);
+      setPauseTimer(true);
+      setGameLoosed(false);
+      // clearTimer();
+    }
+  };
+  // start a new game automatically
+  useEffect(() => {
+    startNewGame();
+  }, []);
 
   // compare 2 selected cards
   useEffect(() => {
@@ -69,32 +103,27 @@ const GamePage = (props) => {
     }
   }, [choiceOne, choiceTwo]);
 
-  // win
-  const isGameFinished = () => {
-    const test = cards.every((element) => element.matched === true);
-    console.log(`element matched ${test}`);
-    if (test === true) {
-      console.log("finishgame");
-      setModalActive(true);
-    }
-  };
-
   useEffect(() => {
     isGameFinished();
-  });
+  }, [cards]);
 
   // loose
-  const isGameLoose = () => {
+  const gameLooseByTurns = () => {
     if (gameMode === 2 && turns >= 20) {
       console.log("loose turns");
-      setModalActive(true);
       setGameLoosed(true);
+      setTimeout(() => setModalActive(true), 500);
       console.log(gameLoosed, "sjsdjsk");
     }
   };
+  const gameLooseByTime = () => {
+    setTimeout(() => setModalActive(true), 500);
+    setGameLoosed(true);
+    console.log(gameLoosed, "loose time");
+  };
 
   useEffect(() => {
-    isGameLoose();
+    gameLooseByTurns();
   });
 
   // reset choices & increase turn
@@ -103,23 +132,6 @@ const GamePage = (props) => {
     setChoiceTwo(null);
     setTurns((prevTurns) => prevTurns + 1);
     setDisabled(false);
-  };
-
-  // start a new game automatically
-  useEffect(() => {
-    shuffleCards();
-  }, []);
-
-  const restartGame = () => {
-    shuffleCards();
-    setModalActive(false);
-  };
-
-  const backToWelcomePage = () => {
-    setModalActive(false);
-    setStartGame(false);
-    setGameMode();
-    setNameValue("New Player");
   };
 
   return (
@@ -138,22 +150,13 @@ const GamePage = (props) => {
       />
 
       <h2>Hi, {nameValue}</h2>
-      <button onClick={shuffleCards}>Start new game</button>
-      <button onClick={() => setModalActive(true)}>Modal open</button>
+      <button onClick={restartGame}>Restart game</button>
 
       {gameMode === 1 ? (
-        // <Countdown
-        //   targetDate={expiringTime}
-        //   startGame={startGame}
-        //   shuffleCards={shuffleCards}
-        //   setStartGame={setStartGame}
-        //   restartGame={restartGame}
-        //   setModalActive={setModalActive}
-        //   setGameLoosed={setGameLoosed}
-        // />
-        <Countdown2
-        setModalActive={setModalActive}
-        setGameLoosed={setGameLoosed}
+        <Countdown
+          pause={pauseTimer}
+          reset={resetTimer}
+          finishTimerHandler={gameLooseByTime}
         />
       ) : (
         <div></div>
@@ -163,7 +166,7 @@ const GamePage = (props) => {
       {gameMode === 3 ? <p>Turns: {turns}</p> : <></>}
 
       <div className={`card-grid`}>
-        {cards.map((card) => (
+        {cards?.map((card) => (
           <SingleCard
             key={card.id}
             card={card}
