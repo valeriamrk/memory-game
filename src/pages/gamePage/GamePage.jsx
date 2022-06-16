@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Countdown, MyModal } from "../../../presentational";
-import { SingleCard } from "../../organisms/singleCard/SingleCard";
+import { Countdown, MyModal, SingleCard } from "../../components/presentational";
 import "animate.css";
 
 import "./GamePage.scss";
@@ -70,9 +69,7 @@ const GamePage = (props) => {
   // win
   const isGameFinished = () => {
     const allCardsMatched = cards?.every((element) => element.matched === true);
-    console.log(`element matched ${allCardsMatched}`);
     if (allCardsMatched === true) {
-      console.log("finishgame");
       setTimeout(() => setModalActive(true), 500);
       setPauseTimer(true);
       setGameLoosed(false);
@@ -112,16 +109,13 @@ const GamePage = (props) => {
   // loose
   const gameLooseByTurns = () => {
     if (gameMode === 2 && turns >= 20) {
-      console.log("loose turns");
       setGameLoosed(true);
       setTimeout(() => setModalActive(true), 500);
-      console.log(gameLoosed, "sjsdjsk");
     }
   };
   const gameLooseByTime = () => {
     setTimeout(() => setModalActive(true), 500);
     setGameLoosed(true);
-    console.log(gameLoosed, "loose time");
   };
 
   useEffect(() => {
@@ -183,4 +177,4 @@ const GamePage = (props) => {
   );
 };
 
-export { GamePage };
+export default GamePage;

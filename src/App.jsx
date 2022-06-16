@@ -1,31 +1,31 @@
 import "./App.scss";
 import React, { useState } from "react";
-import { GamePage, WelcomePage } from "./components/presentational";
+import GamePage from "./pages/gamePage/GamePage"
+import WelcomePage from "./pages/welcomePage/WelcomePage"
+
 
 function App() {
   const [nameValue, setNameValue] = useState("New Player");
   const [gameMode, setGameMode] = useState();
-  const [startGame, setStartGame] = useState(false);
+  const [isGameStarted, setIsGameStarted] = useState(false);
 
   const chooseMode = (id) => {
     setGameMode(id);
-    console.log(id);
   };
 
   const handleButtonClick = () => {
-    console.log("start");
     if (nameValue.length !== 0 && gameMode) {
-      setStartGame(!startGame);
+      setIsGameStarted(!isGameStarted);
     }
   };
 
   return (
     <div className="App">
-      {startGame ? (
+      {isGameStarted ? (
         <GamePage
           nameValue={nameValue}
-          startGame={startGame}
-          setStartGame={setStartGame}
+          startGame={isGameStarted}
+          setStartGame={setIsGameStarted}
           chooseMode={chooseMode}
           gameMode={gameMode}
           setNameValue={setNameValue}

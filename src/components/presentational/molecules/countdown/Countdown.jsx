@@ -43,14 +43,12 @@ const Countdown = (props) => {
 
   const pauseTimer = () => {
     if (pause) {
-      console.log("pause");
       clearInterval(intervalID);
       setIntervalID(null);
     }
   };
 
   const resetTimer = () => {
-    console.log(reset, "reset")
     if (reset) {
           clearInterval(intervalID);
     setIntervalID(setInterval(updateTimer, 1000));
@@ -61,7 +59,6 @@ const Countdown = (props) => {
 
   const updateTimer = () => {
     let { total, minutes, seconds } = getTimeRemaining(deadlineTime);
-    console.log(total, minutes, seconds, "t, m, s");
     if (total >= 0) {
       setTimer(
         (minutes > 9 ? minutes : "0" + minutes) +
@@ -81,7 +78,6 @@ const Countdown = (props) => {
   // clear interval when the timer ends
   useEffect(() => {
     if (hasTimerEnded) {
-      console.log("hasTimerEnded", hasTimerEnded);
       clearInterval(intervalID);
       setIntervalID(null);
       finishTimerHandler()

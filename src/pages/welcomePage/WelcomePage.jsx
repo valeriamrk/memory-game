@@ -1,6 +1,5 @@
 import React from "react";
-import { InputField, MyButton, GameMode } from "../../../presentational";
-
+import { InputField, MyButton, GameMode } from "../../components/presentational";
 import "./WelcomePage.scss";
 
 const WelcomePage = (props) => {
@@ -28,4 +27,4 @@ const WelcomePage = (props) => {
   );
 };
 
-export { WelcomePage };
+export default WelcomePage;

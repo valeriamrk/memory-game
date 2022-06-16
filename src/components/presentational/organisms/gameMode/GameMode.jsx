@@ -12,7 +12,6 @@ const GameMode = (props) => {
 
   const handleClick = (id) => {
     chooseMode(id);
-    console.log(id);
   };
 
   return (
