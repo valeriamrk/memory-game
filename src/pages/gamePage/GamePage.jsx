@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Countdown, MyModal, SingleCard } from "../../components/presentational";
+import {
+  Countdown,
+  MyModal,
+  SingleCard,
+} from "../../components/presentational";
 import "animate.css";
 
 import "./GamePage.scss";
@@ -24,8 +28,8 @@ const GamePage = (props) => {
   } = props;
   const [cards, setCards] = useState();
   const [turns, setTurns] = useState(0);
-  const [choiceOne, setChoiceOne] = useState(null);
-  const [choiceTwo, setChoiceTwo] = useState(null);
+  const [isFirstCardSelected, setisFirstCardSelected] = useState(null);
+  const [isSecondCardSelected, setisSecondCardSelected] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const [modalActive, setModalActive] = useState(false);
   const [gameLoosed, setGameLoosed] = useState(false);
@@ -42,8 +46,8 @@ const GamePage = (props) => {
 
   const startNewGame = () => {
     shuffleCards();
-    setChoiceOne(null);
-    setChoiceTwo(null);
+    setisFirstCardSelected(null);
+    setisSecondCardSelected(null);
     setTurns(0);
     setModalActive(false);
   };
@@ -62,8 +66,10 @@ const GamePage = (props) => {
   };
 
   //handle a choice
-  const handleChoice = (card) => {
-    choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
+  const handleCardChoice = (card) => {
+    isFirstCardSelected
+      ? setisSecondCardSelected(card)
+      : setisFirstCardSelected(card);
   };
 
   // win
@@ -83,12 +89,12 @@ const GamePage = (props) => {
 
   // compare 2 selected cards
   useEffect(() => {
-    if (choiceOne && choiceTwo) {
+    if (isFirstCardSelected && isSecondCardSelected) {
       setDisabled(true);
-      if (choiceOne.src === choiceTwo.src) {
+      if (isFirstCardSelected.src === isSecondCardSelected.src) {
         setCards((prevCards) => {
           return prevCards.map((card) => {
-            if (card.src === choiceOne.src) {
+            if (card.src === isFirstCardSelected.src) {
               return { ...card, matched: true };
             } else {
               return card;
@@ -100,7 +106,7 @@ const GamePage = (props) => {
         setTimeout(() => resetTurn(), 1000);
       }
     }
-  }, [choiceOne, choiceTwo]);
+  }, [isFirstCardSelected, isSecondCardSelected]);
 
   useEffect(() => {
     isGameFinished();
@@ -124,8 +130,8 @@ const GamePage = (props) => {
 
   // reset choices & increase turn
   const resetTurn = () => {
-    setChoiceOne(null);
-    setChoiceTwo(null);
+    setisFirstCardSelected(null);
+    setisSecondCardSelected(null);
     setTurns((prevTurns) => prevTurns + 1);
     setDisabled(false);
   };
@@ -167,8 +173,12 @@ const GamePage = (props) => {
           <SingleCard
             key={card.id}
             card={card}
-            handleChoice={handleChoice}
-            flipped={card === choiceOne || card === choiceTwo || card.matched}
+            handleCardChoice={handleCardChoice}
+            flipped={
+              card === isFirstCardSelected ||
+              card === isSecondCardSelected ||
+              card.matched
+            }
             disabled={disabled}
           />
         ))}
