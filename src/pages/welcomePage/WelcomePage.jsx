@@ -1,5 +1,9 @@
 import React from "react";
-import { InputField, MyButton, GameMode } from "../../components/presentational";
+import {
+  InputField,
+  MyButton,
+  GameMode,
+} from "../../components/presentational";
 import "./WelcomePage.scss";
 
 const WelcomePage = (props) => {
@@ -18,7 +22,7 @@ const WelcomePage = (props) => {
       <div className="userOptions">Choose game mode</div>
       <GameMode chooseMode={chooseMode} gameMode={gameMode} />
       <MyButton
-        disabled={nameValue.length === 0 || gameMode === undefined}
+        isCardFlipDisabled={nameValue.length === 0 || gameMode === undefined}
         clickButton={handleButtonClick}
       >
         Start game

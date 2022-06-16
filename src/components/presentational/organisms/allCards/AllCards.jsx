@@ -8,7 +8,7 @@ const AllCards = (props) => {
     handleCardChoice,
     isFirstCardSelected,
     isSecondCardSelected,
-    disabled,
+    isCardFlipDisabled,
   } = props;
   return (
     <div className="card-grid">
@@ -22,7 +22,7 @@ const AllCards = (props) => {
             card === isSecondCardSelected ||
             card.matched
           }
-          disabled={disabled}
+          isCardFlipDisabled={isCardFlipDisabled}
         />
       ))}
     </div>

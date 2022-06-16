@@ -30,11 +30,11 @@ const GamePage = (props) => {
   const [turns, setTurns] = useState(0);
   const [isFirstCardSelected, setisFirstCardSelected] = useState(null);
   const [isSecondCardSelected, setisSecondCardSelected] = useState(null);
-  const [disabled, setDisabled] = useState(false);
-  const [modalActive, setModalActive] = useState(false);
-  const [gameLosed, setGameLosed] = useState(false);
-  const [pauseTimer, setPauseTimer] = useState(false);
-  const [resetTimer, setResetTimer] = useState(false);
+  const [isCardFlipDisabled, setIsCardFlipDisabled] = useState(false);
+  const [isModalActive, setIsModalActive] = useState(false);
+  const [isGameLosed, setIsGameLosed] = useState(false);
+  const [isPauseTimer, setIsPauseTimer] = useState(false);
+  const [isResetTimer, setIsResetTimer] = useState(false);
 
   // shuffle cards
   const shuffleCards = () => {
@@ -49,17 +49,17 @@ const GamePage = (props) => {
     setisFirstCardSelected(null);
     setisSecondCardSelected(null);
     setTurns(0);
-    setModalActive(false);
+    setIsModalActive(false);
   };
 
   const restartGame = () => {
     startNewGame();
-    setResetTimer(true);
-    setTimeout(() => setResetTimer(false), 0);
+    setIsResetTimer(true);
+    setTimeout(() => setIsResetTimer(false), 0);
   };
 
   const backToWelcomePage = () => {
-    setModalActive(false);
+    setIsModalActive(false);
     setStartGame(false);
     setGameMode();
     setNameValue("New Player");
@@ -76,9 +76,9 @@ const GamePage = (props) => {
   const isGameFinished = () => {
     const allCardsMatched = cards?.every((element) => element.matched === true);
     if (allCardsMatched === true) {
-      setTimeout(() => setModalActive(true), 500);
-      setPauseTimer(true);
-      setGameLosed(false);
+      setTimeout(() => setIsModalActive(true), 500);
+      setIsPauseTimer(true);
+      setIsGameLosed(false);
     }
   };
   // start a new game automatically
@@ -89,7 +89,7 @@ const GamePage = (props) => {
   // compare 2 selected cards
   useEffect(() => {
     if (isFirstCardSelected && isSecondCardSelected) {
-      setDisabled(true);
+      setIsCardFlipDisabled(true);
       if (isFirstCardSelected.src === isSecondCardSelected.src) {
         setCards((prevCards) => {
           return prevCards.map((card) => {
@@ -114,13 +114,13 @@ const GamePage = (props) => {
   // lose
   const gameLoseByTurns = () => {
     if (gameMode === 2 && turns >= 20) {
-      setGameLosed(true);
-      setTimeout(() => setModalActive(true), 500);
+      setIsGameLosed(true);
+      setTimeout(() => setIsModalActive(true), 500);
     }
   };
   const gameLoseByTime = () => {
-    setTimeout(() => setModalActive(true), 500);
-    setGameLosed(true);
+    setTimeout(() => setIsModalActive(true), 500);
+    setIsGameLosed(true);
   };
 
   useEffect(() => {
@@ -132,14 +132,14 @@ const GamePage = (props) => {
     setisFirstCardSelected(null);
     setisSecondCardSelected(null);
     setTurns((prevTurns) => prevTurns + 1);
-    setDisabled(false);
+    setIsCardFlipDisabled(false);
   };
 
   return (
     <div className="App">
       <MyModal
-        modalActive={modalActive}
-        setModalActive={setModalActive}
+        isModalActive={isModalActive}
+        setIsModalActive={setIsModalActive}
         startGame={startGame}
         setStartGame={setStartGame}
         shuffleCards={shuffleCards}
@@ -147,7 +147,7 @@ const GamePage = (props) => {
         turns={turns}
         backToWelcomePage={backToWelcomePage}
         gameMode={gameMode}
-        gameLosed={gameLosed}
+        isGameLosed={isGameLosed}
       />
 
       <h2>Hi, {nameValue}</h2>
@@ -156,8 +156,8 @@ const GamePage = (props) => {
 
       {gameMode === 1 ? (
         <Countdown
-          pause={pauseTimer}
-          reset={resetTimer}
+          pause={isPauseTimer}
+          reset={isResetTimer}
           finishTimerHandler={gameLoseByTime}
         />
       ) : (
@@ -178,7 +178,7 @@ const GamePage = (props) => {
               card === isSecondCardSelected ||
               card.matched
             }
-            disabled={disabled}
+            isCardFlipDisabled={isCardFlipDisabled}
           />
         ))}
       </div>

@@ -2,9 +2,9 @@ import React from "react";
 import "./SingleCard.scss";
 
 const SingleCard = (props) => {
-  const { card, handleCardChoice, flipped, disabled } = props;
+  const { card, handleCardChoice, flipped, isCardFlipDisabled } = props;
   const handleClick = () => {
-    if (!disabled) {
+    if (!isCardFlipDisabled) {
       handleCardChoice(card);
     }
   };

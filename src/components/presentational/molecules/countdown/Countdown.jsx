@@ -41,19 +41,18 @@ const Countdown = (props) => {
     }
   };
 
-  const pauseTimer = () => {
+  const isPauseTimer = () => {
     if (pause) {
       clearInterval(intervalID);
       setIntervalID(null);
     }
   };
 
-  const resetTimer = () => {
+  const isResetTimer = () => {
     if (reset) {
-          clearInterval(intervalID);
-    setIntervalID(setInterval(updateTimer, 1000));
-    setTimer("01 : 00");
-
+      clearInterval(intervalID);
+      setIntervalID(setInterval(updateTimer, 1000));
+      setTimer("01 : 00");
     }
   };
 
@@ -80,7 +79,7 @@ const Countdown = (props) => {
     if (hasTimerEnded) {
       clearInterval(intervalID);
       setIntervalID(null);
-      finishTimerHandler()
+      finishTimerHandler();
     }
   }, [hasTimerEnded]);
 
@@ -94,14 +93,13 @@ const Countdown = (props) => {
 
   // pause timer
   useEffect(() => {
-    pauseTimer();
+    isPauseTimer();
   }, [pause]);
 
   //reset timer
   useEffect(() => {
-    resetTimer();
+    isResetTimer();
   }, [reset]);
-
 
   return (
     <div className="countdownWrapper">

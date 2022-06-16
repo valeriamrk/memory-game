@@ -4,7 +4,7 @@ import "./MyModal.scss";
 
 const MyModal = (props) => {
   const {
-    modalActive,
+    isModalActive,
     startGame,
     setStartGame,
     shuffleCards,
@@ -12,16 +12,16 @@ const MyModal = (props) => {
     turns,
     backToWelcomePage,
     gameMode,
-    gameLosed,
+    isGameLosed,
   } = props;
 
   return (
     <div
-      className={modalActive ? "modal active" : "modal"}
-      modalActive={modalActive}
+      className={isModalActive ? "modal active" : "modal"}
+      isModalActive={isModalActive}
     >
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
-        {gameLosed === true ? (
+        {isGameLosed === true ? (
           <Lose
             startGame={startGame}
             shuffleCards={shuffleCards}
