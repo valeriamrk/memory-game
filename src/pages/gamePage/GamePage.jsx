@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
   Countdown,
+  MyButton,
   MyModal,
   SingleCard,
 } from "../../components/presentational";
-import "animate.css";
 
 import "./GamePage.scss";
 
@@ -151,8 +151,8 @@ const GamePage = (props) => {
       />
 
       <h2>Hi, {nameValue}</h2>
-      <button onClick={restartGame}>Restart game</button>
-      <button onClick={backToWelcomePage}>Exit</button>
+      <MyButton clickButton={restartGame}>Restart game</MyButton>
+      <MyButton clickButton={backToWelcomePage}>Exit</MyButton>
 
       {gameMode === 1 ? (
         <Countdown
