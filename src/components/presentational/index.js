@@ -7,7 +7,7 @@ export * from './molecules/countdown/Countdown'
 export * from './organisms/singleCard/SingleCard'
 export * from './organisms/gameMode/GameMode'
 export * from './organisms/win/Win'
-export * from './organisms/loose/Loose'
+export * from './organisms/lose/Lose'
 export * from './organisms/modal/MyModal'
 export * from './organisms/allCards/AllCards'
 

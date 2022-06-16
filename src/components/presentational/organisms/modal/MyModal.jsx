@@ -1,5 +1,5 @@
 import React from "react";
-import { Loose, Win } from "../../../presentational";
+import { Lose, Win } from "../../../presentational";
 import "./MyModal.scss";
 
 const MyModal = (props) => {
@@ -12,7 +12,7 @@ const MyModal = (props) => {
     turns,
     backToWelcomePage,
     gameMode,
-    gameLoosed,
+    gameLosed,
   } = props;
 
   return (
@@ -21,8 +21,8 @@ const MyModal = (props) => {
       modalActive={modalActive}
     >
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
-        {gameLoosed === true ? (
-          <Loose
+        {gameLosed === true ? (
+          <Lose
             startGame={startGame}
             shuffleCards={shuffleCards}
             setStartGame={setStartGame}

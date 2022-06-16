@@ -32,7 +32,7 @@ const GamePage = (props) => {
   const [isSecondCardSelected, setisSecondCardSelected] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const [modalActive, setModalActive] = useState(false);
-  const [gameLoosed, setGameLoosed] = useState(false);
+  const [gameLosed, setGameLosed] = useState(false);
   const [pauseTimer, setPauseTimer] = useState(false);
   const [resetTimer, setResetTimer] = useState(false);
 
@@ -78,8 +78,7 @@ const GamePage = (props) => {
     if (allCardsMatched === true) {
       setTimeout(() => setModalActive(true), 500);
       setPauseTimer(true);
-      setGameLoosed(false);
-      // clearTimer();
+      setGameLosed(false);
     }
   };
   // start a new game automatically
@@ -112,20 +111,20 @@ const GamePage = (props) => {
     isGameFinished();
   }, [cards]);
 
-  // loose
-  const gameLooseByTurns = () => {
+  // lose
+  const gameLoseByTurns = () => {
     if (gameMode === 2 && turns >= 20) {
-      setGameLoosed(true);
+      setGameLosed(true);
       setTimeout(() => setModalActive(true), 500);
     }
   };
-  const gameLooseByTime = () => {
+  const gameLoseByTime = () => {
     setTimeout(() => setModalActive(true), 500);
-    setGameLoosed(true);
+    setGameLosed(true);
   };
 
   useEffect(() => {
-    gameLooseByTurns();
+    gameLoseByTurns();
   });
 
   // reset choices & increase turn
@@ -148,7 +147,7 @@ const GamePage = (props) => {
         turns={turns}
         backToWelcomePage={backToWelcomePage}
         gameMode={gameMode}
-        gameLoosed={gameLoosed}
+        gameLosed={gameLosed}
       />
 
       <h2>Hi, {nameValue}</h2>
@@ -159,7 +158,7 @@ const GamePage = (props) => {
         <Countdown
           pause={pauseTimer}
           reset={resetTimer}
-          finishTimerHandler={gameLooseByTime}
+          finishTimerHandler={gameLoseByTime}
         />
       ) : (
         <div></div>

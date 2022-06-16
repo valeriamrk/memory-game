@@ -1,12 +1,12 @@
 import React from "react";
-import { MyButton } from "../../../presentational";
-import "./Loose.scss";
+import { MyButton } from "../..";
+import "./Lose.scss";
 
-const Loose = (props) => {
+const Lose = (props) => {
   const { setStartGame, restartGame, gameMode } = props;
   return (
     <div>
-      <h2>You loose!</h2>
+      <h2>You lose!</h2>
       {gameMode === 1 ? <h4>Your time is over!</h4> : <></>}
       {gameMode === 2 ? <h4>Your turns are over!</h4> : <></>}
       <MyButton clickButton={() => restartGame()}>Play again</MyButton>
@@ -15,4 +15,4 @@ const Loose = (props) => {
   );
 };
 
-export { Loose };
+export { Lose };
