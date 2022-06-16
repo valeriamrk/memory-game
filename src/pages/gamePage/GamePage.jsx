@@ -167,7 +167,7 @@ const GamePage = (props) => {
 
       {gameMode === 3 ? <p>Turns: {turns}</p> : <></>}
 
-      <div className={"card-grid"}>
+      <div className="card-grid">
         {cards?.map((card) => (
           <SingleCard
             key={card.id}
