@@ -161,7 +161,7 @@ const GamePage = (props) => {
           finishTimerHandler={gameLoseByTime}
         />
       ) : (
-        <div></div>
+        <></>
       )}
       {gameMode === 2 ? <p>Turns: {turns}/20</p> : <></>}
 
