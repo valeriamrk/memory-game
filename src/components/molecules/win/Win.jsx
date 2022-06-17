@@ -1,5 +1,5 @@
 import React from "react";
-import { MyButton } from "../../../components";
+import { MyButton } from "../..";
 
 const Win = (props) => {
   const { restartGame, turns, backToWelcomePage, gameMode } = props;
