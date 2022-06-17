@@ -1,5 +1,5 @@
 import React from "react";
-import { Lose, Win } from "../../../presentational";
+import { Lose, Win } from "../../../components";
 import "./MyModal.scss";
 
 const MyModal = (props) => {

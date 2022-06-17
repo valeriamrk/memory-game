@@ -3,7 +3,7 @@ import {
   InputField,
   MyButton,
   GameMode,
-} from "../../components/presentational";
+} from "../../components";
 import "./WelcomePage.scss";
 
 const WelcomePage = (props) => {

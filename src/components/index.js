@@ -3,8 +3,8 @@ export * from './atoms/myButton/MyButton'
 
 export * from './molecules/countdown/Countdown'
 export * from './molecules/countdown/Countdown'
+export * from './molecules/singleCard/SingleCard'
 
-export * from './organisms/singleCard/SingleCard'
 export * from './organisms/gameMode/GameMode'
 export * from './organisms/win/Win'
 export * from './organisms/lose/Lose'

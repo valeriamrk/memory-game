@@ -4,7 +4,7 @@ import {
   MyButton,
   MyModal,
   SingleCard,
-} from "../../components/presentational";
+} from "../../components";
 
 import "./GamePage.scss";
 

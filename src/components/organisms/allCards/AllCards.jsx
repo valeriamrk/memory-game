@@ -1,5 +1,5 @@
 import React from "react";
-import { SingleCard } from "../../../presentational";
+import { SingleCard } from "../../../components";
 import "./AllCards.scss";
 
 const AllCards = (props) => {

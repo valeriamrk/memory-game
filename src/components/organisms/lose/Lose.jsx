@@ -1,5 +1,5 @@
 import React from "react";
-import { MyButton } from "../../../presentational";
+import { MyButton } from "../../../components";
 import "./Lose.scss";
 
 const Lose = (props) => {
