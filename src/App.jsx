@@ -1,8 +1,6 @@
 import "./App.scss";
 import React, { useState } from "react";
-import GamePage from "./pages/gamePage/GamePage"
-import WelcomePage from "./pages/welcomePage/WelcomePage"
-
+import { GamePage, WelcomePage } from "./pages";
 
 function App() {
   const [nameValue, setNameValue] = useState("New Player");

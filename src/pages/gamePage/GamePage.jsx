@@ -186,4 +186,4 @@ const GamePage = (props) => {
   );
 };
 
-export default GamePage;
+export { GamePage };

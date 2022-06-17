@@ -31,4 +31,4 @@ const WelcomePage = (props) => {
   );
 };
 
-export default WelcomePage;
+export { WelcomePage };
