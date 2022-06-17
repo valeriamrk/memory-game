@@ -9,12 +9,12 @@ import {
 import "./GamePage.scss";
 
 const cardImages = [
-  { src: "/img/book.png", matched: false },
-  { src: "/img/bunny.png", matched: false },
-  { src: "/img/hat.png", matched: false },
-  { src: "/img/magic-ball.png", matched: false },
-  { src: "/img/rainbow-castle.png", matched: false },
-  { src: "/img/smoke.png", matched: false },
+  { id: 1, src: "/img/book.png", matched: false },
+  { id: 2, src: "/img/bunny.png", matched: false },
+  { id: 3, src: "/img/hat.png", matched: false },
+  { id: 4, src: "/img/magic-ball.png", matched: false },
+  { id: 5, src: "/img/rainbow-castle.png", matched: false },
+  { id: 6, src: "/img/smoke.png", matched: false },
 ];
 
 const GamePage = (props) => {
