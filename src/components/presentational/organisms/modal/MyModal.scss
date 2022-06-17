@@ -13,10 +13,10 @@
 }
 
 .modal.active {
-transform: scale(1);
+  transform: scale(1);
 }
 
-.modal__content {
+.modalContent {
   padding: 20px;
   border-radius: 4px;
   background-color: #1b1523;

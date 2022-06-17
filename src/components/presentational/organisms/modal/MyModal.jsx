@@ -20,7 +20,7 @@ const MyModal = (props) => {
       className={isModalActive ? "modal active" : "modal"}
       isModalActive={isModalActive}
     >
-      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
+      <div className="modalContent" onClick={(e) => e.stopPropagation()}>
         {isGameLosed === true ? (
           <Lose
             startGame={startGame}
