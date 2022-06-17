@@ -28,8 +28,8 @@ const GamePage = (props) => {
   } = props;
   const [cards, setCards] = useState();
   const [turns, setTurns] = useState(0);
-  const [isFirstCardSelected, setisFirstCardSelected] = useState(null);
-  const [isSecondCardSelected, setisSecondCardSelected] = useState(null);
+  const [isFirstCardSelected, setIsFirstCardSelected] = useState(null);
+  const [isSecondCardSelected, setIsSecondCardSelected] = useState(null);
   const [isCardFlipDisabled, setIsCardFlipDisabled] = useState(false);
   const [isModalActive, setIsModalActive] = useState(false);
   const [isGameLosed, setIsGameLosed] = useState(false);
@@ -46,8 +46,8 @@ const GamePage = (props) => {
 
   const startNewGame = () => {
     shuffleCards();
-    setisFirstCardSelected(null);
-    setisSecondCardSelected(null);
+    setIsFirstCardSelected(null);
+    setIsSecondCardSelected(null);
     setTurns(0);
     setIsModalActive(false);
   };
@@ -68,8 +68,8 @@ const GamePage = (props) => {
   //handle a choice
   const handleCardChoice = (card) => {
     isFirstCardSelected
-      ? setisSecondCardSelected(card)
-      : setisFirstCardSelected(card);
+      ? setIsSecondCardSelected(card)
+      : setIsFirstCardSelected(card);
   };
 
   // win
@@ -129,8 +129,8 @@ const GamePage = (props) => {
 
   // reset choices & increase turn
   const resetTurn = () => {
-    setisFirstCardSelected(null);
-    setisSecondCardSelected(null);
+    setIsFirstCardSelected(null);
+    setIsSecondCardSelected(null);
     setTurns((prevTurns) => prevTurns + 1);
     setIsCardFlipDisabled(false);
   };
