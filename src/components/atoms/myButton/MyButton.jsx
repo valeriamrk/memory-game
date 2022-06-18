@@ -5,12 +5,14 @@ const MyButton = (props) => {
   const {
     children,
     clickButton,
+    isCardFlipDisabled,
+    ...other
   } = props;
   const handleClick = () => {
     clickButton()
   };
 
-  return <button {...props} onClick={() => handleClick()}>{children}</button>;
+  return <button {...other} onClick={() => handleClick()}>{children}</button>;
 };
 
 export { MyButton };

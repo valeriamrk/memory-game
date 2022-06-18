@@ -2,10 +2,10 @@ import React from "react";
 import "./InputField.scss";
 
 const InputField = (props) => {
-  const { setValue } = props;
+  const { setValue, ...other } = props;
 
   return (
-    <input {...props} onChange={(event) => setValue(event.target.value)} />
+    <input {...other} onChange={(event) => setValue(event.target.value)} />
   );
 };
 
