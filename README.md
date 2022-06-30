@@ -1,5 +1,7 @@
 # Memory Game
 
+![Memory game](/src/assets/images/memorygame.png "Memory game")
+
 ## How to install
 
 Clone it from GitHub to your computer and install dependencies.

@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Countdown,
-  MyButton,
-  MyModal,
-  SingleCard,
-} from "../../components";
+import { Countdown, MyButton, MyModal, SingleCard } from "../../components";
 
 import "./GamePage.scss";
 
