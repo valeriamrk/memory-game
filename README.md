@@ -2,6 +2,11 @@
 
 ![Memory game](/src/assets/images/memorygame.png "Memory game")
 
+Used technology stack:
+
+- React
+- SASS/SCSS
+
 ## How to install
 
 Clone it from GitHub to your computer and install dependencies.
